@@ -2,7 +2,7 @@
 setlocal
 cd /d "%~dp0"
 
-echo Generation des fichiers JSON depuis update.xlsx...
+echo Generation des fichiers JSON depuis update.xlsm...
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0tools\generate-json.ps1"
 
 if errorlevel 1 (

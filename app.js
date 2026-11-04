@@ -2,7 +2,7 @@
 
 const state = {
   data: { videos: [], websites: [], designs: [], photos: [] },
-  filters: { videos: "all", websites: "all", designs: "all", photos: "all" },
+  filters: { videos: "all", designs: "all", photos: "all" },
   lightbox: { type: null, item: null },
 };
 
@@ -145,7 +145,6 @@ function renderSection(key) {
   if (key === "videos") renderVideos();
   if (key === "photos") renderPhotos();
   if (key === "designs") renderDesigns();
-  if (key === "websites") renderWebsites();
 }
 
 function filteredItems(key) {
@@ -209,20 +208,11 @@ function renderImageGallery(key, selector, lightboxType) {
 }
 
 function renderWebsites() {
-  const featured = state.data.websites
-    .filter((item) => String(item.highlight).toLowerCase() === "oui")
-    .sort((a, b) => a.title === "GitHub" ? 1 : b.title === "GitHub" ? -1 : 0);
-  replaceChildren(document.querySelector("#websites-featured"), featured, createWebsiteCard);
-
-  const regular = filteredItems("websites")
-    .filter((item) => String(item.highlight).toLowerCase() !== "oui");
-  replaceChildren(document.querySelector("#websites-grid"), regular, createWebsiteCard);
+  replaceChildren(document.querySelector("#websites-grid"), state.data.websites, createWebsiteCard);
 }
 
 function createWebsiteCard(project) {
   const card = createCard();
-  if (project.title === "GitHub") card.classList.add("card-github");
-
   const body = createElement("div", "card-body");
   body.append(createImageBlock(imagePath(project.image), project.title || "Projet", false));
   const content = createElement("div", "card-content-group");

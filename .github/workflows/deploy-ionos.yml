@@ -24,7 +24,8 @@ jobs:
             --exclude='.github/' \
             --exclude='deploy/' \
             --exclude='README.md' \
-            --exclude='update.xlsx' \
+            --exclude='*.xlsm' \
+            --exclude='*.xlsx' \
             --exclude='*.bat' \
             --exclude='tools/' \
             ./ deploy/

@@ -7,7 +7,7 @@ param(
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot
 
-if (-not $WorkbookPath) { $WorkbookPath = Join-Path $projectRoot 'update.xlsx' }
+if (-not $WorkbookPath) { $WorkbookPath = Join-Path $projectRoot 'update.xlsm' }
 if (-not $OutputDirectory) { $OutputDirectory = Join-Path $projectRoot 'data' }
 
 $WorkbookPath = [IO.Path]::GetFullPath($WorkbookPath)
@@ -243,7 +243,7 @@ try {
     }
 
     $sheetDefinitions = [ordered]@{
-        website = @{ File = 'websites.json'; Required = @('title', 'description', 'link', 'category', 'technologies', 'image', 'highlight') }
+        website = @{ File = 'websites.json'; Required = @('title', 'description', 'link', 'technologies', 'image') }
         design  = @{ File = 'designs.json'; Required = @('image', 'category', 'description') }
         video   = @{ File = 'videos.json'; Required = @('url', 'category', 'description', 'platform') }
         photo   = @{ File = 'photos.json'; Required = @('image', 'category', 'description') }

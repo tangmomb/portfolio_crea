@@ -1,69 +1,29 @@
 [
     {
-        "title":  "Tennis Winner",
-        "description":  "Qui a gagné les derniers tournois majeurs et JO ?",
-        "link":  "https://tennisgsolympicsscores-cmxidknbazy5swry5voadm.streamlit.app/",
-        "category":  "data",
-        "technologies":  [
-                             "Python"
-                         ],
-        "image":  "tennisstats.png",
-        "highlight":  "oui"
-    },
-    {
         "title":  "Geocom Networks",
-        "description":  "Un site complet réalisé sur Webflow",
+        "description":  "Site d\u0027entreprise",
         "link":  "https://www.geocom-networks.com/",
-        "category":  "web",
         "technologies":  [
                              "Webflow"
                          ],
-        "image":  "geocom.png",
-        "highlight":  "oui"
-    },
-    {
-        "title":  "Ce portfolio",
-        "description":  "Frontend en Nest JS, backend/api en Nest JS avec appel vers une Google Sheet en base de données,",
-        "link":  "#",
-        "category":  "web",
-        "technologies":  [
-                             "NextJS",
-                             "NestJS"
-                         ],
-        "image":  "portfolio.png",
-        "highlight":  "oui"
-    },
-    {
-        "title":  "GitHub",
-        "description":  "Consultez mon GitHub pour d\u0027autres projets !",
-        "link":  "https://github.com/tangmomb",
-        "category":  "all",
-        "technologies":  [
-                             "GitHub"
-                         ],
-        "image":  "github.png",
-        "highlight":  "oui"
+        "image":  "geocom.png"
     },
     {
         "title":  "Cavanine",
         "description":  "Site e-commerce",
-        "link":  "",
-        "category":  "web",
+        "link":  "https://cavanine.com/",
         "technologies":  [
                              "WordPress"
                          ],
-        "image":  "cavanine.png",
-        "highlight":  "non"
+        "image":  "cavanine.png"
     },
     {
         "title":  "KissnFly Films",
         "description":  "Site portfolio",
         "link":  "https://www.kissnflyfilms.com/",
-        "category":  "web",
         "technologies":  [
                              "Webflow"
                          ],
-        "image":  "kissnfly.png",
-        "highlight":  "non"
+        "image":  "kissnfly.png"
     }
 ]

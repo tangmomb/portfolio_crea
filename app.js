@@ -312,6 +312,27 @@ function renderLightbox() {
   image.src = imagePath(item.image);
   image.alt = item.description || "Aperçu";
   elements.lightboxContent.append(image);
+
+  const links = documentLinks(item.lien);
+  if (links.length) {
+    const actions = createElement("div", "lightbox-links");
+    links.forEach((href, index) => {
+      const link = createText("a", "lightbox-link", links.length > 1 ? `Voir le document ${index + 1}` : "Voir le document");
+      link.href = href;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      actions.append(link);
+    });
+    elements.lightboxContent.append(actions);
+  }
+}
+
+function documentLinks(value) {
+  return String(value || "")
+    .split(",")
+    .map((entry) => entry.trim())
+    .filter(Boolean)
+    .map((entry) => (/^https?:\/\//i.test(entry) || entry.startsWith("assets/") ? entry : `assets/files/${entry.replace(/^\/+/, "")}`));
 }
 
 function navigateLightbox(direction) {

@@ -583,6 +583,37 @@ main,
   object-fit: contain;
 }
 
+.lightbox-content:has(.lightbox-links) {
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.lightbox-content:has(.lightbox-links) img {
+  max-height: 72vh;
+}
+
+.lightbox-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.lightbox-link {
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  background: var(--primary);
+  color: var(--primary-foreground);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.lightbox-link:hover,
+.lightbox-link:focus-visible {
+  opacity: 0.85;
+}
+
 .lightbox-content iframe {
   width: 100%;
   aspect-ratio: 16 / 9;

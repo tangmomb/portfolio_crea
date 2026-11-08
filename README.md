@@ -54,7 +54,7 @@ Les fichiers de travail ne sont pas copiés sur le serveur : `update.xlsm`, les 
 commence par un point (`.git`…).
 
 La configuration du serveur (Caddyfile et timer) se trouve dans `deploy/infomaniak/` du dépôt
-`tangmomb/agent_mots_cles`.
+`tangmomb/agent_video_edit_detection`.
 
 L'ancien workflow [`.github/workflows/deploy-ionos.yml`](.github/workflows/deploy-ionos.yml), qui envoyait
 le site par SFTP sur IONOS, est désactivé dans GitHub.

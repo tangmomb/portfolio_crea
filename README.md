@@ -15,7 +15,7 @@ Ce dépôt contient le site du portfolio et les fichiers utilisés pour gérer s
    git push origin main
    ```
 
-Le site https://tanguym.fr se met à jour tout seul dans les 10 minutes qui suivent (voir « Publication »).
+Le site https://tanguym.fr se met à jour tout seul dans la minute qui suit le push (voir « Publication »).
 
 Le générateur repose uniquement sur PowerShell, déjà fourni avec Windows. Il ignore les lignes vides formatées par Excel et produit :
 
@@ -45,19 +45,21 @@ Les navigateurs empêchent généralement un fichier HTML ouvert par double-clic
 ## Publication
 
 Depuis le 08/11/2026, le site est servi par Caddy sur le VPS Infomaniak (179.237.98.117), et non plus
-par l'hébergement IONOS. Le VPS garde dans `/srv/portfolio` une copie partielle de ce dépôt, mise à jour
-depuis `main` toutes les 10 minutes par le timer systemd `site-pull@portfolio.timer`. Pour forcer la
-mise à jour : `sudo systemctl start site-pull@portfolio.service`.
+par l'hébergement IONOS. Le VPS garde dans `/srv/portfolio` une copie partielle de ce dépôt.
+
+À chaque push sur `main`, le workflow [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) se
+connecte au VPS et lance `site-pull@portfolio.service`, qui récupère la dernière version de `main`. Sa clé
+SSH (secret `VPS_SSH_KEY`) ne peut rien faire d'autre sur le serveur. Pour relancer une mise en ligne sans
+push : onglet Actions de GitHub, « Mise en ligne », « Run workflow ».
 
 Les fichiers de travail ne sont pas copiés sur le serveur : `update.xlsm`, les fichiers `.bat`, le dossier
-`tools`, le README et la configuration GitHub restent dans le dépôt. Caddy refuse aussi tout chemin qui
+`tools`, le README et le dossier `.github` restent dans le dépôt. Caddy refuse aussi tout chemin qui
 commence par un point (`.git`…).
 
-La configuration du serveur (Caddyfile et timer) se trouve dans `deploy/infomaniak/` du dépôt
+La configuration du serveur (Caddyfile et service de mise à jour) se trouve dans `deploy/infomaniak/` du dépôt
 `tangmomb/agent_video_edit_detection`.
 
-L'ancien workflow [`.github/workflows/deploy-ionos.yml`](.github/workflows/deploy-ionos.yml), qui envoyait
-le site par SFTP sur IONOS, est désactivé dans GitHub.
+L'ancien workflow GitHub qui envoyait le site par SFTP sur IONOS a été supprimé.
 
 ## Structure du classeur
 

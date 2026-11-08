@@ -15,7 +15,7 @@ Ce dépôt contient le site du portfolio et les fichiers utilisés pour gérer s
    git push origin main
    ```
 
-GitHub Actions publie alors automatiquement le site sur l'hébergement IONOS.
+Le site https://tanguym.fr se met à jour tout seul dans les 10 minutes qui suivent (voir « Publication »).
 
 Le générateur repose uniquement sur PowerShell, déjà fourni avec Windows. Il ignore les lignes vides formatées par Excel et produit :
 
@@ -42,23 +42,22 @@ Le générateur repose uniquement sur PowerShell, déjà fourni avec Windows. Il
 
 Les navigateurs empêchent généralement un fichier HTML ouvert par double-clic de lire du JSON local. Double-cliquer sur `apercu.bat`, puis laisser la fenêtre ouverte pendant le test. Cette commande sert seulement à la prévisualisation locale.
 
-## Déploiement automatique sur IONOS
+## Publication
 
-Le workflow [`.github/workflows/deploy-ionos.yml`](.github/workflows/deploy-ionos.yml) s'exécute après chaque `git push` sur la branche `main`. Il envoie par SFTP les fichiers publiés dans le dossier auquel le compte IONOS est limité (`/tanguymfr/`).
+Depuis le 08/11/2026, le site est servi par Caddy sur le VPS Infomaniak (179.237.98.117), et non plus
+par l'hébergement IONOS. Le VPS garde dans `/srv/portfolio` une copie partielle de ce dépôt, mise à jour
+depuis `main` toutes les 10 minutes par le timer systemd `site-pull@portfolio.timer`. Pour forcer la
+mise à jour : `sudo systemctl start site-pull@portfolio.service`.
 
-Les fichiers de travail ne sont pas envoyés : `update.xlsm`, les fichiers `.bat`, le dossier `tools`, le README et la configuration GitHub restent dans le dépôt.
+Les fichiers de travail ne sont pas copiés sur le serveur : `update.xlsm`, les fichiers `.bat`, le dossier
+`tools`, le README et la configuration GitHub restent dans le dépôt. Caddy refuse aussi tout chemin qui
+commence par un point (`.git`…).
 
-### Configuration initiale
+La configuration du serveur (Caddyfile et timer) se trouve dans `deploy/infomaniak/` du dépôt
+`tangmomb/agent_mots_cles`.
 
-Dans GitHub, ouvrir **Settings → Secrets and variables → Actions** puis créer les secrets de dépôt suivants :
-
-- `FTP_SERVER` : le nom du serveur SFTP fourni par IONOS, sans `sftp://` ;
-- `FTP_USERNAME` : le nom d'utilisateur SFTP ;
-- `FTP_PASSWORD` : le mot de passe SFTP.
-
-Le workflow utilise le protocole SFTP sur le port 22. Ne jamais enregistrer ces valeurs dans le dépôt ou dans ce fichier.
-
-Une fois ces secrets créés, chaque push sur `main` déclenche le déploiement. Son état est visible dans l'onglet **Actions** du dépôt GitHub.
+L'ancien workflow [`.github/workflows/deploy-ionos.yml`](.github/workflows/deploy-ionos.yml), qui envoyait
+le site par SFTP sur IONOS, est désactivé dans GitHub.
 
 ## Structure du classeur
 
